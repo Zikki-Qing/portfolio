@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #F5F3EF;
+  --foreground: #43464b;
+  --primary: #8FA3B0;
+  --accent: #C9A9A6;
+  --grey-green: #A3B18A;
+  --light-grey: #E6E3DF;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#8FA3B0] via-[#A3B18A] to-[#C9A9A6];
+}
+
+.glass-card {
+  @apply bg-white/40 backdrop-blur-xl border border-[#E6E3DF] rounded-[2rem] p-8 transition-all duration-500 hover:border-[#8FA3B0]/20 hover:shadow-lg hover:shadow-[#8FA3B0]/5;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F5F3EF;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E6E3DF;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #D1CDC7;
+}
+
+/* Custom Selection */
+::selection {
+  background: rgba(143, 163, 176, 0.2);
+  color: #43464b;
+}
