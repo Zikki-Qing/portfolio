@@ -1,21 +1,40 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Briefcase, Calendar, MapPin, CheckCircle2 } from "lucide-react";
+import { CheckCircle2, ExternalLink } from "lucide-react";
 
 const experiences = [
   {
-    role: "Full Stack Software Engineer Internship",
-    company: "RhombusAI",
-    location: "Sydney, Australia",
-    period: "Nov 2025 - Feb 2026",
-    summary: "Contributed to the development and stabilisation of a rapidly evolving startup platform by resolving complex frontend and backend logic issues across the stack. Improved code quality and system design robustness while supporting continuous feature delivery in a high-iteration environment. Strengthened platform reliability through structured smoke testing, automated regression workflows, and performance benchmarking on large datasets.",
+    company: "Marketing Simplified",
+    companyUrl: "https://zmarkio.com/",
+    role: "Full-Stack Developer",
+    period: "Mar 2026 – Present",
+    context: "Industry Experience",
+    outcome: "Shipped workflow features that improve auditability, short-lived context handling, and human review before automation.",
+    summary:
+      "Building full-stack features for a marketing workflow platform, focused on workflow traceability, short-lived context management, and human-in-the-loop review.",
     achievements: [
-      "Stabilised cross-stack system logic in a rapidly evolving AI data platform. Diagnosed and resolved complex frontend rendering issues, backend logic defects, API integration failures and LLM-driven workflow inconsistencies to improve end-to-end reliability.",
-      "Established automated testing workflows to safeguard release quality. Designed Cypress-based smoke tests embedded within frontend code and integrated them into CI/CD pipelines, alongside scheduled nightly regression runs via GitHub Actions with screenshot-based failure reporting.",
-      "Led large-dataset performance validation to assess scalability. Conducted backend performance testing under high-volume data scenarios and developed workflow-level API baseline benchmarks to identify bottlenecks and monitor performance trends.",
-      "Improved deployment confidence during rapid product iteration. Introduced structured validation practices and proactive risk detection to maintain platform stability amid continuous feature delivery.",
+      "Designed a PostgreSQL audit logging system with composite indexes and database-level immutability controls, improving traceability of workflow actions.",
+      "Built a Redis TTL-based AI analysis context so users guide LLM output direction while keeping short-lived request context ephemeral.",
+      "Designed and implemented a human-in-the-loop anomaly review workflow, replacing automatic AI decision creation with user-confirmed approval.",
     ],
+    tags: ["Next.js 14", "PostgreSQL", "Redis", "REST APIs"],
+  },
+  {
+    company: "RhombusAI",
+    companyUrl: null,
+    role: "Full-Stack Software Engineer Intern",
+    period: "Nov 2025 – Feb 2026",
+    context: "Industry Internship",
+    outcome: "Reduced workflow failure rate by 15–25% and recurring frontend/workflow bugs by 30–40%.",
+    summary:
+      "Improved the reliability of an AI-driven data platform by debugging inconsistent LLM-generated workflows and strengthening validation, testing, and regression coverage.",
+    achievements: [
+      "Diagnosed inconsistent LLM-generated workflows across React frontend, backend services, and REST APIs.",
+      "Built Cypress smoke tests and nightly regression suites in GitHub Actions to reduce recurring bugs.",
+      "Conducted API-level benchmarking and validation to identify bottlenecks and improve responsiveness.",
+    ],
+    tags: ["React", "TypeScript", "Cypress", "GitHub Actions"],
   },
 ];
 
@@ -23,70 +42,94 @@ export default function Experience() {
   return (
     <section id="experience" className="py-24 bg-transparent">
       <div className="container mx-auto px-6">
-        <div className="max-w-4xl mx-auto mb-16 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 italic tracking-tight italic text-[#43464b]">
-            Professional <span className="gradient-text">Experience</span>
-          </h2>
-          <p className="text-[#8FA3B0] text-lg font-medium">
-            My professional career in software engineering.
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.5 }}
+          className="mb-16"
+        >
+          <p className="text-xs font-bold text-primary tracking-[0.3em] uppercase mb-4">
+            03 // INDUSTRY EXPERIENCE
           </p>
-        </div>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
+            Industry{" "}
+            <span className="gradient-text">Experience</span>
+          </h2>
+        </motion.div>
 
-        <div className="max-w-4xl mx-auto space-y-12">
+        <div className="space-y-8 max-w-4xl">
           {experiences.map((exp, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="glass-card relative overflow-hidden group"
+              className="glass-card !p-0 overflow-hidden"
             >
-              <div className="flex flex-col md:flex-row md:items-start justify-between mb-8 gap-6">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-4">
-                    <div className="p-4 rounded-2xl bg-[#8FA3B0]/10 text-[#8FA3B0] border border-[#E6E3DF]">
-                      <Briefcase className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-bold group-hover:text-[#8FA3B0] transition-colors text-[#43464b] tracking-tight">
-                        {exp.role}
-                      </h3>
-                      <p className="text-lg font-bold text-[#A3B18A] tracking-wide uppercase text-sm mt-1">
-                        {exp.company}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex flex-col gap-2 text-sm text-[#8FA3B0] font-bold tracking-widest uppercase pt-2">
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4" />
-                    {exp.period}
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4" />
-                    {exp.location}
-                  </div>
-                </div>
-              </div>
-
-              <div className="mb-8 p-6 rounded-[1.5rem] bg-[#F5F3EF]/50 border border-[#E6E3DF]">
-                <p className="text-[#43464b]/80 leading-relaxed font-medium italic text-base">
-                  {exp.summary}
+              {/* Outcome stripe */}
+              <div className="px-8 py-4 border-b border-white/[0.07] bg-primary/[0.04]">
+                <p className="text-sm font-bold text-primary leading-snug">
+                  {exp.outcome}
                 </p>
               </div>
 
-              <ul className="space-y-5">
-                {exp.achievements.map((item, i) => (
-                  <li key={i} className="flex items-start gap-4 group/item">
-                    <CheckCircle2 className="w-5 h-5 text-[#A3B18A] mt-1 flex-shrink-0 group-hover/item:scale-110 transition-transform" />
-                    <span className="text-[#43464b]/80 group-hover/item:text-[#43464b] transition-colors leading-relaxed font-medium">
-                      {item}
+              <div className="p-8">
+                {/* Header */}
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+                  <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <h3 className="text-xl font-bold text-foreground">{exp.company}</h3>
+                      {exp.companyUrl && (
+                        <a
+                          href={exp.companyUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-muted hover:text-primary transition-colors"
+                          aria-label={`Visit ${exp.company}`}
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                        </a>
+                      )}
+                    </div>
+                    <p className="text-primary-soft font-bold text-sm">{exp.role}</p>
+                  </div>
+                  <div className="text-right shrink-0">
+                    <p className="text-muted text-sm font-medium">{exp.period}</p>
+                    <span className="inline-block mt-1 px-3 py-0.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold uppercase tracking-widest">
+                      {exp.context}
                     </span>
-                  </li>
-                ))}
-              </ul>
+                  </div>
+                </div>
+
+                {/* Summary */}
+                <p className="text-muted text-sm leading-relaxed mb-6 italic border-l-2 border-primary/30 pl-4">
+                  {exp.summary}
+                </p>
+
+                {/* Achievements */}
+                <ul className="space-y-3 mb-6">
+                  {exp.achievements.map((achievement, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                      <p className="text-sm text-muted leading-relaxed">{achievement}</p>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Tech badges */}
+                <div className="flex flex-wrap gap-2">
+                  {exp.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.07] text-muted text-[10px] font-bold uppercase tracking-widest"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>
