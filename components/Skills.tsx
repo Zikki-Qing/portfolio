@@ -1,88 +1,159 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Layout, Database, Shield, Wrench } from "lucide-react";
 
-const skills = [
+const techs = [
   {
-    category: "Product Frontend",
-    icon: <Layout className="w-5 h-5 text-primary" />,
-    description: "Build responsive web and mobile interfaces for user-facing product flows.",
-    tags: ["React", "Next.js", "React Native", "TypeScript"],
+    abbr: "⚛",
+    color: "#61DAFB",
+    name: "React",
+    desc: "Component-driven UI for web and mobile product flows.",
   },
   {
-    category: "Backend & APIs",
-    icon: <Database className="w-5 h-5 text-primary-soft" />,
-    description: "Build API-driven features, audit trails, workflow state, and short-lived data context.",
-    tags: ["Python", "Django", "Node.js", "PostgreSQL", "Redis", "REST APIs"],
+    abbr: "NX",
+    color: "#E8E6E3",
+    name: "Next.js",
+    desc: "Full-stack React framework powering production web apps.",
   },
   {
-    category: "Testing & Reliability",
-    icon: <Shield className="w-5 h-5 text-primary" />,
-    description: "Strengthen reliability through regression testing, automation, and systems thinking.",
-    tags: ["Cypress", "Jest", "GitHub Actions", "Docker"],
+    abbr: "TS",
+    color: "#4A9EE8",
+    name: "TypeScript",
+    desc: "Typed JavaScript for reliable, maintainable codebases.",
   },
   {
-    category: "Workflow Features",
-    icon: <Wrench className="w-5 h-5 text-primary-soft" />,
-    description: "Build and improve workflow tooling: human review flows, validation checks, audit logging.",
-    tags: ["Human-in-the-loop", "LLM Validation", "Workflow Tooling", "Audit Logging"],
+    abbr: "Py",
+    color: "#F7C948",
+    name: "Python",
+    desc: "Backend services, Django APIs, and workflow automation.",
+  },
+  {
+    abbr: "PG",
+    color: "#6BA8D9",
+    name: "PostgreSQL",
+    desc: "Relational database for audit trails and workflow state.",
+  },
+  {
+    abbr: "Rd",
+    color: "#FF6B6B",
+    name: "Redis",
+    desc: "Ephemeral context storage and TTL-based workflow data.",
+  },
+  {
+    abbr: "Cy",
+    color: "#69D3A7",
+    name: "Cypress",
+    desc: "End-to-end and regression testing across CI pipelines.",
+  },
+  {
+    abbr: "⚙",
+    color: "#8B9499",
+    name: "GitHub Actions",
+    desc: "Automated testing, builds, and deployment workflows.",
   },
 ];
+
+function TechIconBox({ abbr, color }: { abbr: string; color: string }) {
+  return (
+    <div className="relative w-[68px] h-[68px] mb-5">
+      <div className="w-full h-full border border-white/[0.1] bg-white/[0.03] flex items-center justify-center">
+        <span
+          className="font-mono font-bold text-xl leading-none select-none"
+          style={{ color }}
+        >
+          {abbr}
+        </span>
+      </div>
+      {/* Corner selection handles */}
+      <span className="absolute -top-px -left-px w-1.5 h-1.5 bg-white/20" />
+      <span className="absolute -top-px -right-px w-1.5 h-1.5 bg-white/20" />
+      <span className="absolute -bottom-px -left-px w-1.5 h-1.5 bg-white/20" />
+      <span className="absolute -bottom-px -right-px w-1.5 h-1.5 bg-white/20" />
+    </div>
+  );
+}
 
 export default function Skills() {
   return (
     <section id="skills" className="py-24 bg-transparent">
       <div className="container mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
-          className="mb-16"
-        >
-          <p className="text-xs font-bold text-primary tracking-[0.3em] uppercase mb-4">
-            05 // TECHNICAL STRENGTHS
-          </p>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
-            What I Can <span className="gradient-text">Build</span>
-          </h2>
-        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {skills.map((skill, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
-              viewport={{ once: true, margin: "-100px" }}
-              className="glass-card flex flex-col gap-5 !p-7"
+        {/* Header: large title | label | description */}
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start mb-20">
+
+          {/* Left: large title */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5 }}
+            className="flex-[2] min-w-0"
+          >
+            <h2
+              className="font-mono font-black leading-none tracking-tighter whitespace-nowrap"
+              style={{ fontSize: "clamp(2.2rem, 5.5vw, 5rem)" }}
             >
-              <div className="p-3 rounded-xl bg-white/[0.05] border border-white/[0.07] w-fit">
-                {skill.icon}
-              </div>
-              <div>
-                <h3 className="text-sm font-bold text-foreground uppercase tracking-widest mb-2">
-                  {skill.category}
-                </h3>
-                <p className="text-muted text-sm leading-relaxed mb-4">
-                  {skill.description}
-                </p>
-                <div className="flex flex-wrap gap-1.5">
-                  {skill.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.07] text-muted text-[10px] font-bold uppercase tracking-wider"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          ))}
+              <span className="text-foreground">TECH</span>
+              <span className="text-foreground">–</span>
+              <span className="italic" style={{ color: "var(--primary)" }}>STACK</span>
+              <span className="cursor-blink" aria-hidden="true">_</span>
+            </h2>
+          </motion.div>
+
+          {/* Center: section label */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="flex-[1] lg:pt-3"
+          >
+            <p className="text-xs font-mono font-bold text-primary tracking-[0.3em] uppercase">
+              05 // TECHNICAL STRENGTHS
+            </p>
+          </motion.div>
+
+          {/* Right: description */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex-[2] lg:pt-2"
+          >
+            <p className="text-sm font-mono text-muted leading-relaxed">
+              The tools I reach for across the full stack — React and Next.js on the frontend,
+              Python and PostgreSQL on the backend, Redis for workflow context,
+              and Cypress for reliability.
+            </p>
+          </motion.div>
+
         </div>
+
+        {/* Tech grid: outer border + overflow-hidden for seamless cell borders */}
+        <div className="border-t border-l border-white/[0.06] overflow-hidden">
+          <div className="grid grid-cols-2 md:grid-cols-4">
+            {techs.map((tech, index) => (
+              <motion.div
+                key={tech.name}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+                className="p-6 md:p-8 border-b border-r border-white/[0.06]"
+              >
+                <TechIconBox abbr={tech.abbr} color={tech.color} />
+                <h3 className="font-mono font-bold text-foreground text-sm mb-2 tracking-wide">
+                  {tech.name}
+                </h3>
+                <p className="font-mono text-muted text-xs leading-relaxed">
+                  {tech.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </section>
   );
