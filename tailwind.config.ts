@@ -13,7 +13,11 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         primary: "var(--primary)",
+        "primary-soft": "var(--primary-soft)",
         accent: "var(--accent)",
+        card: "var(--card)",
+        "card-border": "var(--card-border)",
+        muted: "var(--muted)",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

@@ -1,15 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, Linkedin, Menu, X } from "lucide-react";
+import { Github, Linkedin, Menu, X, FileDown } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const navLinks = [
+  { name: "Home", href: "#top" },
   { name: "About", href: "#about" },
   { name: "Experience", href: "#experience" },
   { name: "Projects", href: "#projects" },
   { name: "Skills", href: "#skills" },
-  { name: "Beyond", href: "#beyond" },
   { name: "Contact", href: "#contact" },
 ];
 
@@ -26,42 +26,69 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav 
+    <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "py-4 bg-[#F5F3EF]/80 backdrop-blur-lg border-b border-[#E6E3DF]" : "py-6 bg-transparent"
+        scrolled
+          ? "py-4 bg-background/80 backdrop-blur-md border-b border-white/[0.05]"
+          : "py-6 bg-transparent"
       }`}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
-        <a href="#" className="text-2xl font-bold tracking-tighter hover:text-[#8FA3B0] transition-colors uppercase text-[#43464b]">
-          Ziqi<span className="text-[#8FA3B0]">.</span>Qing
+        <a
+          href="#top"
+          className="text-2xl font-bold tracking-tighter hover:text-primary transition-colors uppercase text-foreground"
+        >
+          Zikki<span className="text-primary">.</span>Qing
         </a>
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a 
-              key={link.name} 
+            <a
+              key={link.name}
               href={link.href}
-              className="text-xs font-bold text-[#8FA3B0] hover:text-[#43464b] transition-colors uppercase tracking-widest"
+              className="text-xs font-bold text-muted hover:text-foreground transition-colors uppercase tracking-widest"
             >
               {link.name}
             </a>
           ))}
-          <div className="h-4 w-px bg-[#E6E3DF] mx-2" />
+          <div className="h-4 w-px bg-white/10 mx-2" />
           <div className="flex items-center gap-4">
-            <a href="https://github.com/Zikki-Qing" target="_blank" rel="noopener noreferrer" className="text-[#8FA3B0] hover:text-[#43464b] transition-colors">
+            <a
+              href="https://github.com/Zikki-Qing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted hover:text-foreground transition-colors"
+              aria-label="GitHub"
+            >
               <Github className="w-5 h-5" />
             </a>
-            <a href="https://www.linkedin.com/in/jade-qing-191186330/" target="_blank" rel="noopener noreferrer" className="text-[#8FA3B0] hover:text-[#43464b] transition-colors">
+            <a
+              href="https://www.linkedin.com/in/zikki-qing-191186330/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted hover:text-foreground transition-colors"
+              aria-label="LinkedIn"
+            >
               <Linkedin className="w-5 h-5" />
+            </a>
+            {/* TODO: add /public/resume.pdf before recruiter-facing deployment to activate this button */}
+            <a
+              href="/resume.pdf"
+              download="Zikki_Qing_CV.pdf"
+              className="flex items-center gap-1.5 px-4 py-2 rounded-full border border-primary/40 text-primary text-xs font-bold tracking-widest uppercase hover:bg-primary/10 transition-colors"
+            >
+              <FileDown className="w-3.5 h-3.5" />
+              Resume
             </a>
           </div>
         </div>
 
         {/* Mobile Menu Button */}
-        <button 
-          className="md:hidden p-2 text-[#8FA3B0] hover:text-[#43464b] transition-colors"
+        <button
+          className="md:hidden p-2 text-muted hover:text-foreground transition-colors"
           onClick={() => setIsOpen(!isOpen)}
+          aria-label={isOpen ? "Close menu" : "Open menu"}
         >
           {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -69,27 +96,48 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
-          className="md:hidden bg-[#F5F3EF] border-b border-[#E6E3DF] overflow-hidden"
+          className="md:hidden bg-card border-b border-white/[0.07] overflow-hidden"
         >
           <div className="px-6 py-8 space-y-6 text-center">
             {navLinks.map((link) => (
-              <a 
-                key={link.name} 
+              <a
+                key={link.name}
                 href={link.href}
-                className="block text-lg font-bold text-[#8FA3B0] hover:text-[#43464b] transition-colors uppercase tracking-widest"
+                className="block text-lg font-bold text-muted hover:text-foreground transition-colors uppercase tracking-widest"
                 onClick={() => setIsOpen(false)}
               >
                 {link.name}
               </a>
             ))}
-            <div className="pt-4 flex items-center justify-center gap-8 text-[#8FA3B0]">
-              <a href="https://github.com/Zikki-Qing" target="_blank" rel="noopener noreferrer" className="hover:text-[#43464b] transition-colors">
+            <a
+              href="/resume.pdf"
+              download="Zikki_Qing_CV.pdf"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-primary/40 text-primary text-sm font-bold tracking-widest uppercase hover:bg-primary/10 transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              <FileDown className="w-4 h-4" />
+              Download Resume
+            </a>
+            <div className="pt-4 flex items-center justify-center gap-8 text-muted">
+              <a
+                href="https://github.com/Zikki-Qing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground transition-colors"
+                aria-label="GitHub"
+              >
                 <Github className="w-6 h-6" />
               </a>
-              <a href="https://www.linkedin.com/in/jade-qing-191186330/" target="_blank" rel="noopener noreferrer" className="hover:text-[#43464b] transition-colors">
+              <a
+                href="https://www.linkedin.com/in/zikki-qing-191186330/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground transition-colors"
+                aria-label="LinkedIn"
+              >
                 <Linkedin className="w-6 h-6" />
               </a>
             </div>

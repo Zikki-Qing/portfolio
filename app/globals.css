@@ -3,12 +3,15 @@
 @tailwind utilities;
 
 :root {
-  --background: #F5F3EF;
-  --foreground: #43464b;
-  --primary: #8FA3B0;
-  --accent: #C9A9A6;
-  --grey-green: #A3B18A;
-  --light-grey: #E6E3DF;
+  --background: #0A0B0E;
+  --foreground: #E8E6E3;
+  --primary: #00D4FF;
+  --primary-soft: #4FC3DD;
+  --accent: #7C3AED;
+  --card: #111318;
+  --card-border: rgba(255, 255, 255, 0.07);
+  --muted: #8B9499;
+  --light-grey: #1A1D24;
 }
 
 body {
@@ -22,36 +25,84 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  .text-accent-inline {
+    color: var(--primary-soft);
+  }
 }
 
 .gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#8FA3B0] via-[#A3B18A] to-[#C9A9A6];
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#00D4FF] to-[#7C3AED];
 }
 
 .glass-card {
-  @apply bg-white/40 backdrop-blur-xl border border-[#E6E3DF] rounded-[2rem] p-8 transition-all duration-500 hover:border-[#8FA3B0]/20 hover:shadow-lg hover:shadow-[#8FA3B0]/5;
+  @apply bg-white/[0.03] backdrop-blur-xl border border-white/[0.07] rounded-[2rem] p-8 transition-all duration-500 hover:border-[#00D4FF]/20 hover:shadow-lg hover:shadow-[#00D4FF]/5 hover:-translate-y-0.5;
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F5F3EF;
+  background: #0D0F12;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #E6E3DF;
+  background: #1A1D24;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #D1CDC7;
+  background: #252830;
 }
 
 /* Custom Selection */
 ::selection {
-  background: rgba(143, 163, 176, 0.2);
-  color: #43464b;
+  background: rgba(0, 212, 255, 0.15);
+  color: #E8E6E3;
+}
+
+/* Blob */
+@keyframes blob-morph {
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  25%       { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  50%       { border-radius: 50% 60% 30% 40% / 40% 50% 60% 50%; }
+  75%       { border-radius: 60% 30% 50% 60% / 30% 60% 70% 40%; }
+}
+@keyframes blob-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Blinking cursor */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor-blink {
+  color: var(--primary);
+  display: inline-block;
+  margin-left: 0.05em;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cursor-blink {
+    animation: blink 1.2s step-end infinite;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
