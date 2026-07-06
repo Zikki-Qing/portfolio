@@ -44,5 +44,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## ✉️ Contact
 - **Email**: [qingziqi6@gmail.com](mailto:qingziqi6@gmail.com)
-- **LinkedIn**: [Jade Qing](https://www.linkedin.com/in/jade-qing-191186330/)
+- **LinkedIn**: [Zikki Qing](https://www.linkedin.com/in/zikki-qing-191186330/)
 - **GitHub**: [@Zikki-Qing](https://github.com/Zikki-Qing)
